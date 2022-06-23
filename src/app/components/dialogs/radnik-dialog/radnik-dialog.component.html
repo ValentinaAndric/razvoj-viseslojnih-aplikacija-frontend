@@ -1,0 +1,119 @@
+<div class="container">
+  <h3 mat-dialog-title *ngIf="flag == 1">Dodavanje radnika</h3>
+  <h3 mat-dialog-title *ngIf="flag == 2">
+    Modifikacija radnika {{ data.idRadnik }}
+  </h3>
+  <h3 mat-dialog-title *ngIf="flag == 3">
+    Brisanje radnika: {{ data.idRadnik }}
+  </h3>
+
+  <form class="mat-dialog-content" #formControl="ngForm">
+    <div class="form">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Ime"
+          name="Ime"
+          [(ngModel)]="data.ime"
+          [disabled]="flag == 3"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="form">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Prezime"
+          name="Prezime"
+          [(ngModel)]="data.prezime"
+          [disabled]="flag == 3"
+          required
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Broj licne karte"
+          name="brojLk"
+          [(ngModel)]="data.brojLk"
+          [disabled]="flag == 3"
+          required
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field *ngIf="flag == 1">
+        <mat-select
+          placeholder="Obrazovanje"
+          name="Obrazovanje"
+          [(ngModel)]="data.obrazovanje"
+          required
+        >
+          <mat-option
+            *ngFor="let obrazovanje of obrazovanje"
+            [value]="obrazovanje"
+          >
+            {{ obrazovanje.naziv }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field *ngIf="flag == 2 || flag == 3">
+        <mat-select
+          [compareWith]="compare"
+          placeholder="Obrazovanje"
+          name="Obrazovanje"
+          [(ngModel)]="data.obrazovanje"
+          [disabled]="flag == 3"
+          required
+        >
+          <mat-option
+            *ngFor="let obrazovanje of obrazovanje"
+            [value]="obrazovanje"
+          >
+            {{ obrazovanje.naziv }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div class="mat-dialog-actions">
+    <button
+      mat-button
+      *ngIf="flag == 1"
+      [disabled]="!formControl.valid"
+      (click)="add()"
+      mat-dialog-close="1"
+      type="submit"
+    >
+      Sacuvaj
+    </button>
+    <button
+      mat-button
+      *ngIf="flag == 2"
+      [disabled]="!formControl.valid"
+      (click)="update()"
+      mat-dialog-close="1"
+      type="submit"
+    >
+      Azuriraj
+    </button>
+    <button
+      mat-button
+      *ngIf="flag == 3"
+      (click)="delete()"
+      mat-dialog-close="1"
+    >
+      Obrisi
+    </button>
+    <button mat-button (click)="cancel()">Ponisti</button>
+  </div>
+</div>

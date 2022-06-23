@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+.about-section {
+  padding: 50px;
+  text-align: center;
+  background-color: palevioletred;
+  color: white;
+}
+
+.column-2 {
+  width: 90%;
+  padding: 40px;
+  padding-left: 70px;
+  padding-right: 70px;
+  height: 475px;
+  margin-top: 10px;
+  background-color: indianred;
+  line-height: 2;
+}
